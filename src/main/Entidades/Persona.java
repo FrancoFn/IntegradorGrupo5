@@ -12,7 +12,6 @@ import javax.persistence.*;
 public abstract class Persona {
 
     @Id
-
     private int id;
 
     @Column(name = "nombre")
@@ -33,6 +32,7 @@ public abstract class Persona {
     public Persona() {
     }
 
+   
     //Constructor
     public Persona(int id, String nombre, String domicilio, long telefono, String email, int estado) {
         this.id = id;

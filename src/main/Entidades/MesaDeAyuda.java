@@ -13,11 +13,6 @@ public class MesaDeAyuda extends Persona {
 	private List<Incidente> incidentes = new ArrayList<>();
 	private List<Cliente> clientes = new ArrayList<>();
 	
-	public MesaDeAyuda(String id, String nombre, String domicilio, String telefono, String email) {
-		super(id, nombre, domicilio, telefono, email);
-		// TODO Auto-generated constructor stub
-	}
-	
 	public void mostrarServicioCliente (Cliente cliente) {
 	}
 	

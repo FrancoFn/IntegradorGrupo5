@@ -10,19 +10,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "cliente") // Nombre de la tabla en la base de datos para la clase Cliente
 public class Cliente extends Persona {
 
-    //@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-   // private List<Incidente> incidentes = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Incidente> incidentes = new ArrayList<>();
     @Column(name = "cuit")
     private long cuit;
   //  @OneToOne(cascade = CascadeType.ALL)
@@ -47,6 +46,7 @@ public class Cliente extends Persona {
         // Simplemente imprimir un mensaje para demostración
         System.out.println("Cliente dado de alta: " + this.getNombre());
     }
+    
 
     // Método para modificar datos del cliente
     public void modificacionCliente(String nuevoNombre, String nuevoDomicilio, long nuevoTelefono, String nuevoEmail) {
