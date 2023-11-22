@@ -12,6 +12,7 @@ import javax.persistence.*;
 public abstract class Persona {
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "nombre")
@@ -36,7 +37,7 @@ public abstract class Persona {
     //Constructor
     public Persona(int id, String nombre, String domicilio, long telefono, String email, int estado) {
         this.id = id;
-        this.nombre = nombre;
+    	this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.email = email;

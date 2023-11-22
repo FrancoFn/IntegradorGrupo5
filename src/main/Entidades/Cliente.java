@@ -15,8 +15,9 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Cliente extends Persona {
-
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	
+	
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Incidente> incidentes = new ArrayList<>();
     @Column(name = "cuit")
     private long cuit;
