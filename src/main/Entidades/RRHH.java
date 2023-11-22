@@ -1,15 +1,14 @@
 package main.Entidades;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.persistence.Entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
-//anotaciones lombok para setter and getter de todos los atributos
+@Entity
 @Setter  
 @Getter
 public class RRHH extends Persona {
-	
-	private List<Tecnico> tecnicos = new ArrayList<>();
 	
 	public void altaTecnico (Tecnico tecnico) {}
 	
@@ -17,7 +16,4 @@ public class RRHH extends Persona {
 	
 	public void bajaTecnico (Tecnico tecnico) {}
 	
-	public List<Incidente> verIncidentes () {
-	return null;
-	}
 }

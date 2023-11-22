@@ -1,17 +1,14 @@
 package main.Entidades;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.persistence.Entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
-//anotaciones lombok para setter and getter de todos los atributos
+@Entity
 @Setter  
 @Getter
 public class MesaDeAyuda extends Persona {
-	
-
-	private List<Incidente> incidentes = new ArrayList<>();
-	private List<Cliente> clientes = new ArrayList<>();
 	
 	public void mostrarServicioCliente (Cliente cliente) {
 	}
