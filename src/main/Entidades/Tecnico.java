@@ -33,10 +33,26 @@ public class Tecnico extends Persona {
 	public Tecnico() {
 	}
 	
-	public Tecnico(int id, String nombre, String domicilio, long telefono, String email, int estado, List<Especialidad> especialidades) {
-		super(id, nombre, domicilio, telefono, email,estado);
+	public Tecnico(String nombre, String domicilio, long telefono, String email, int estado, List<Especialidad> especialidades) {
+		super(nombre, domicilio, telefono, email,estado);
 		this.especialidades = especialidades;
 		this.disponibilidad = true;
+	}
+	
+	public void altaTecnico() {
+        System.out.println("Tecnico dado de alta: " + this.getNombre());
+    }
+	
+	public void modificarTecnico (String nuevodomicilio, long telefono, String email,List<Especialidad> especialidades) {
+		this.setDomicilio(nuevodomicilio);
+		this.setTelefono(telefono);
+		this.setEmail(email);
+		this.setEspecialidades(especialidades);
+	}
+	
+	public void bajaTecnico() {
+		this.setEstado(0);
+        System.out.println("Tecnico dado de baja: " + this.getNombre());
 	}
 	
 	public void revisarIncidente () {}

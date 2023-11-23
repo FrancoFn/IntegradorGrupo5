@@ -6,13 +6,14 @@ import javax.persistence.*;
 
 @Setter
 @Getter
-@Entity
+//@Entity
 @Table(name = "persona") // Nombre de la tabla en la base de datos
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) // Estrategia de herencia
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) //JOINED) Estrategia de herencia
+@MappedSuperclass
 public abstract class Persona {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "nombre")
@@ -33,11 +34,9 @@ public abstract class Persona {
     public Persona() {
     }
 
-   
     //Constructor
-    public Persona(int id, String nombre, String domicilio, long telefono, String email, int estado) {
-        this.id = id;
-    	this.nombre = nombre;
+    public Persona(String nombre, String domicilio, long telefono, String email, int estado) {
+        this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.email = email;

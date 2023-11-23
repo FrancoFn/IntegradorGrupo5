@@ -1,21 +1,12 @@
 package main;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import main.Entidades.Cliente;
-import main.Entidades.Especialidad;
-import main.Entidades.Estado;
 import main.Entidades.Incidente;
-import main.Entidades.Tecnico;
-import main.Entidades.ServicioContratado;
-import javax.persistence.EntityTransaction;
-
 
 public class IntegradorGrupo5Main {
 
@@ -57,32 +48,19 @@ public class IntegradorGrupo5Main {
 						System.out.println ("1 - Alta de Cliente");
 						System.out.println ("2 - Modificacion de Cliente");
 						System.out.println ("3 - Baja de Cliente");
-						System.out.println ("4 - Voler al menu principal");
+						System.out.println ("4 - Volver al menu principal");
 						
 						opcioncomercial = teclado.nextInt();
 						
 						switch (opcioncomercial) {
 						case 1:
-							EntityManager em = getEntityManager();
-					        EntityTransaction tx = em.getTransaction();
-					        tx.begin();
-					        ServicioContratado servicio= ServicioContratado.PACK_BASICO;
-					        Cliente cliente = new Cliente(0 ,"F", "Calle Secundaria", 987654321, "maria@example.com", 1234567890, 1, servicio);
-					        Cliente cliente2 = new Cliente(1, "P", "Calle Prueba", 1234456, "prueba@example.com", 1234, 2, servicio);
-					        cliente2.altaCliente();        
-					        em.persist(cliente);
-					        em.persist(cliente2);
-					        tx.commit();
+							Comercial.altaCliente();
 							break;
 						case 2:
-							System.out.println ("Por favor Ingrese el id de Cliente a modificar");
-							//Chequear que el id exista
-							//Consultar que dato quiere modificar y armar otro menu con swicth llamando a setter 
+							Comercial.modificarCliente();	 
 							break;
 						case 3:
-							System.out.println ("Por favor Ingrese el id de Cliente a dar de baja");
-							//Chequear que el id exista y se podria chequear que no tenga incidentes pendientes
-							//Cambiar estado
+							Comercial.bajaCliente();
 							break;
 						case 4:
 							break;
@@ -91,7 +69,7 @@ public class IntegradorGrupo5Main {
 						}
 					} while (opcioncomercial != 4);
 					break;
-				case 2:	//SECTOR TECNICO
+				case 2:	//SECTOR RRHH
 					int opcionRRHH = 0;
 					do
 					{
@@ -99,24 +77,19 @@ public class IntegradorGrupo5Main {
 						System.out.println ("1 - Alta de Tecnico");
 						System.out.println ("2 - Modificacion de Tecnico");
 						System.out.println ("3 - Baja de Tecnico");
-						System.out.println ("4 - Voler al menu principal");
+						System.out.println ("4 - Volver al menu principal");
 						
 						opcionRRHH = teclado.nextInt();
 						
 						switch (opcionRRHH) {
 						case 1:
-							//Constructor tecnico 
-							//Tecnico tecnico = new Tecnico(null, null, null, null, null, null);
+							RRHH.altaTecnico();
 							break;
-						case 2:
-							System.out.println ("Por favor Ingrese el id de Tecnico a modificar");
-							//Chequear que el id exista
-							//Consultar que dato quiere modificar y armar otro menu con swicth llamando a setter 
+					    case 2:
+							RRHH.modificarTecnico(); 
 							break;
 						case 3:
-							System.out.println ("Por favor Ingrese el id de Tecnico a dar de baja");
-							//Chequear que el id exista y se podria chequear que no tenga incidentes pendientes
-							//Cambiar estado
+							RRHH.bajaTecnico();
 							break;
 						case 4:
 							break;
@@ -132,7 +105,7 @@ public class IntegradorGrupo5Main {
 						System.out.println ("Bienvenido al sector de Mesa de Ayuda. Que desea realizar:");
 						System.out.println ("1 - Consultar Cliente");
 						System.out.println ("2 - Cargar Incidente");
-						System.out.println ("3 - Voler al menu principal");
+						System.out.println ("3 - Volver al menu principal");
 						
 						opcionMesaAyuda = teclado.nextInt();
 						
