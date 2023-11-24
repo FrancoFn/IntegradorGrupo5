@@ -2,23 +2,9 @@ package main;
 
 import java.util.Scanner;
 
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import main.Entidades.Incidente;
-
-public class IntegradorGrupo5Main {
-
-	public static EntityManager getEntityManager() {
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA_PU");
-        EntityManager manager = factory.createEntityManager();
-
-        return manager;
-    }
+public class IntegradorGrupo5Main {	
 	
-	public static void main(String[] args) {
+		public static void main(String[] args) {
 		                
         int opcionprincipal = 0;
 		Scanner teclado = new Scanner (System.in);
@@ -111,13 +97,10 @@ public class IntegradorGrupo5Main {
 						
 						switch (opcionMesaAyuda) {
 						case 1:
-							//Consultar si existe el cliente y mostrar el servicio contrado
-							//Sino existe derivar al sector comercial
+							MesaDeAyuda.mostrarServicioCliente();
 							break;
 						case 2:
-							Incidente incidente = new Incidente (null, null, null, null, null, null, null);
-							//Chequear que el id exista
-							//Consultar que dato quiere modificar y armar otro menu con swicth llamando a setter 
+							MesaDeAyuda.cargarIncidente();
 							break;
 						case 3:
 							break;
@@ -137,15 +120,5 @@ public class IntegradorGrupo5Main {
 					System.out.println ("La opción ingresada no es valida por favor ingrese una opción valida.");
 			}
 		} while (opcionprincipal != 7);	
-		//List<Especialidad> especialidad = new ArrayList<>();
-        //especialidad.add(Especialidad.GOOGLE);
-        //Tecnico tecnico = new Tecnico (1,"Tecnico1","Prueba",1234,"tecnico1@gmail.com",1,especialidad);
-		//List<Tecnico> tecnicos = new ArrayList<>();
-		//tecnicos.add(tecnico);
-		//em.persist(tecnico);
-		//Estado estado = Estado.EN_CURSO;
-		//Incidente incidente = new Incidente ("1","Prueba1","1 hora","Prueba",cliente, tecnicos,estado);
-		//em.persist(incidente);
-       
 	}
 }

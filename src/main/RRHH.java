@@ -16,16 +16,8 @@ import main.Entidades.Tecnico;
 public class RRHH {
 static Scanner teclado = new Scanner (System.in);	
 	
-	public static EntityManager getEntityManager() {
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA_PU");
-        EntityManager manager = factory.createEntityManager();
-
-        return manager;
-    }
-	
 	public static void altaTecnico () {
-		EntityManager em = getEntityManager();
+		EntityManager em = ManagerPersistence.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         List<Especialidad> especialidades1 = new ArrayList<>();
@@ -38,7 +30,6 @@ static Scanner teclado = new Scanner (System.in);
 		em.persist(tecnico1);
 		em.persist(tecnico2);
 		tx.commit();
-		teclado.close();
 	}
 	
 	public static void modificarTecnico() {
@@ -47,24 +38,32 @@ static Scanner teclado = new Scanner (System.in);
 		List<Especialidad> especialidades2 = new ArrayList<>();
         especialidades2.add(Especialidad.TANGO);
         especialidades2.add(Especialidad.LINUX);
-		EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-		tx.begin();
+		EntityManager em = ManagerPersistence.getEntityManager();
 		Tecnico tecnico = em.find(Tecnico.class, id);
-		tecnico.modificarTecnico ("Calle Prueba1"+new Date(), 11111, "prueba1@example.com"+new Date(),especialidades2);		
-		tx.commit();
-        teclado.close();
+		if (tecnico != null) {
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			tecnico.modificarTecnico ("Calle Prueba1"+new Date(), 11111, "prueba1@example.com"+new Date(),especialidades2);		
+			tx.commit();
+		} else {
+			System.out.println ("El tecnico no existe.");
+			RRHH.modificarTecnico();
+		}
 	}
 	
 	public static void bajaTecnico() {
 		System.out.println ("Por favor ingrese el Id del tecnico a dar de baja.");
 		int id = teclado.nextInt();
-		EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-		tx.begin();
+		EntityManager em = ManagerPersistence.getEntityManager();
 		Tecnico tecnico = em.find(Tecnico.class, id);
-        tecnico.bajaTecnico();
-        tx.commit();
-        teclado.close();
+		if (tecnico != null) {
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			tecnico.bajaTecnico();
+			tx.commit();
+		} else {
+			System.out.println ("El tecnico no existe.");
+			RRHH.bajaTecnico();
+		}
 	}
 }

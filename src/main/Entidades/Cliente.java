@@ -55,4 +55,6 @@ public class Cliente extends Persona {
         this.setEstado(0);
         System.out.println("Cliente dado de baja: " + this.getNombre());
     }
+    
+    
 }

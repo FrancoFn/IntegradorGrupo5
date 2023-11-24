@@ -13,6 +13,5 @@ public class Empresa {
 	private String domicilio;
 	private List<Tecnico> areaTecnica = new ArrayList<>();
 	private List<Cliente> clientes = new ArrayList<>();
-	private List<MesaDeAyuda> recepcion = new ArrayList<>();
-			
+				
 }

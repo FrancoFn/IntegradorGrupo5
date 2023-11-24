@@ -14,16 +14,8 @@ import main.Entidades.ServicioContratado;
 public class Comercial {
 	static Scanner teclado = new Scanner (System.in);	
 	
-	public static EntityManager getEntityManager() {
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA_PU");
-        EntityManager manager = factory.createEntityManager();
-
-        return manager;
-    }
-	
 	public static void altaCliente () {
-		EntityManager em = getEntityManager();
+		EntityManager em = ManagerPersistence.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 		tx.begin();
         ServicioContratado servicio1= ServicioContratado.PACK_BASICO;
@@ -48,32 +40,40 @@ public class Comercial {
         em.persist(cliente5);
         em.persist(cliente6);
         tx.commit();
-        teclado.close();
-	}
+    }
 	
 	public static void modificarCliente() {
 		System.out.println ("Por favor ingrese el Id del cliente a modificar.");
 		int id = teclado.nextInt();
 		ServicioContratado servicio2= ServicioContratado.PACK_INTERMEDIO;
-		EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-		tx.begin();
+		EntityManager em = ManagerPersistence.getEntityManager();
 		Cliente cliente = em.find(Cliente.class, id);
-        cliente.modificarCliente ("Calle Prueba1", 11111, "prueba1@example.com"+new Date(),servicio2);
-        tx.commit();
-        teclado.close();
+		if (cliente != null) {
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			cliente.modificarCliente ("Calle Prueba1", 11111, "prueba1@example.com"+new Date(),servicio2);
+			System.out.println("El cliente: "+cliente.getNombre()+" ha sido modificado.");
+			tx.commit();
+        } else {
+            System.out.println("El cliente no existe");
+            Comercial.modificarCliente();
+        }
 	}
 	
 	public static void bajaCliente() {
 		System.out.println ("Por favor ingrese el Id del cliente a dar de baja.");
 		int id = teclado.nextInt();
-		EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-		tx.begin();
+		EntityManager em = ManagerPersistence.getEntityManager();
 		Cliente cliente = em.find(Cliente.class, id);
-        cliente.bajaCliente ();
-        tx.commit();
-        teclado.close();
+        if (cliente != null) {
+        	EntityTransaction tx = em.getTransaction();
+        	tx.begin();
+			cliente.bajaCliente ();
+			tx.commit();
+        } else {
+        	System.out.println("El cliente no existe");
+            Comercial.bajaCliente();
+        }
 	}
 	
 	
