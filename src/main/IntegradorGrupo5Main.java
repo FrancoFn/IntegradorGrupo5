@@ -2,6 +2,9 @@ package main;
 
 import java.util.Scanner;
 
+import main.Entidades.Incidente;
+
+
 public class IntegradorGrupo5Main {	
 	
 		public static void main(String[] args) {
@@ -112,6 +115,7 @@ public class IntegradorGrupo5Main {
 				case 4: //SECTOR TECNICO
 				case 5: //SECTOR CLIENTE
 				case 6: //SECTOR INFORME
+					Incidente.proceso();
 				case 7: //SALIR DEL SISTEMA
 					System.out.println ("Muchas gracias por su visita");
 					teclado.close();

@@ -1,5 +1,5 @@
 package main.Entidades;
 
-public enum Estado {
-	ASIGNADO, EN_CURSO, RESUELTO
+public interface Estado {
+	void proceso(Incidente incidente);
 }
