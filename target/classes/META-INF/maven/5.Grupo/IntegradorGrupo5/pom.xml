@@ -8,6 +8,10 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <artifactId>IntegradorGrupo5</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+	<properties> 
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
+	</properties>
+
     <dependencies>
         <!-- Hibernate JPA -->
         <dependency>
