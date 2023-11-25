@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.persistence.Query;
 
 import main.Entidades.Cliente;
+import main.Entidades.Especialidad;
 
 
 public class MesaDeAyuda {
@@ -22,12 +23,32 @@ public class MesaDeAyuda {
 		q.setParameter("doc1", razonsocial);
 		List<?> cliente = q.getResultList();
 		if (!cliente.isEmpty()){
-			System.out.println ("El sercicio contratado por el cliente es: "+ ((Cliente)cliente.get(0)).getContratacion());			
+			if ((((Cliente)cliente.get(0)).getEstado() == 0)){
+				System.out.println("El cliente ha sido dado de baja. Comuniquese con el sector comercial.");
+			} else {
+				System.out.println ("El sercicio contratado por el cliente es: "+ ((Cliente)cliente.get(0)).getContratacion());
+			}						
 		} else {
-			System.out.println ("El cliente no existe comuniquese con el sector comercial para su ingreso.");
+			System.out.println ("El cliente no existe. Comuniquese con el sector comercial para su ingreso.");
 		}            	
 	}
 	
 	public static void cargarIncidente() {
+		Especialidad[] especialidades = Especialidad.values();
+		Especialidad categoria = null;
+		int opcionCategoria = 0;
+		do {
+			System.out.println ("Por favor seleccione la categoria del incidente:");
+			for(int i = 0; i <= 5; i++) {
+				System.out.println (i+1 +"- "+especialidades[i]);			
+			}	
+			opcionCategoria = teclado.nextInt();
+			if (opcionCategoria < 1 || opcionCategoria > especialidades.length) {
+				System.out.println ("La opción ingresada no es correcta.");
+			} else {
+				categoria = especialidades[opcionCategoria-1];
+			}
+		} while (opcionCategoria < 1 || opcionCategoria > especialidades.length);
+		
 	}
 }
