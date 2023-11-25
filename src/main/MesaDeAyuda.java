@@ -29,5 +29,6 @@ public class MesaDeAyuda {
 	}
 	
 	public static void cargarIncidente() {
+		
 	}
 }

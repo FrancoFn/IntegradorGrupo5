@@ -67,25 +67,35 @@ public class Incidente {
 		//this.estado = estado;
 	}
 	public static void proceso() {
-	    // ... tu código existente
+        entityManagerFactory = Persistence.createEntityManagerFactory("JPA_PU");
+        entityManager = entityManagerFactory.createEntityManager();
 
-	    try {
-	        entityManager.getTransaction().begin();
+        try {
+            entityManager.getTransaction().begin();
 
-	        // Obtener todos los incidentes de la base de datos
-	        List<Incidente> incidentes = entityManager.createQuery("SELECT i FROM Incidente i", Incidente.class)
-	                .getResultList();
+            // Obtener todos los incidentes de la base de datos
+            List<Incidente> incidentes = entityManager.createQuery("SELECT i FROM Incidente i", Incidente.class)
+                    .getResultList();
 
-	        // Enviar cada incidente a la interfaz Estado
-	        for (Incidente incidente : incidentes) {
-	            estado.proceso(incidente); // Llama al método proceso() de la instancia de Estado
-	        }
+            // Verificar si la lista de incidentes está vacía
+            if (incidentes.isEmpty()) {
+                System.out.println("Sin incidentes registrados");
+            } else {
+                // Enviar cada incidente a la interfaz Estado
+                for (Incidente incidente : incidentes) {
+                    Estado.estado.proceso(incidente);
+                }
+            }
 
-	        entityManager.getTransaction().commit();
-
-	        // ... resto de tu código existente
-	    } catch (Exception e) {
-	        // ... manejo de excepciones
-	    }
-	}		
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+            entityManagerFactory.close();
+        }
+    }		
 }
