@@ -116,6 +116,7 @@ public class IntegradorGrupo5Main {
 				case 5: //SECTOR CLIENTE
 				case 6: //SECTOR INFORME
 					Incidente.proceso();
+					break;
 				case 7: //SALIR DEL SISTEMA
 					System.out.println ("Muchas gracias por su visita");
 					teclado.close();

@@ -40,20 +40,22 @@ public class Incidente {
 	private Cliente cliente;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Tecnico> tecnico = new ArrayList<>();
-	 @ManyToOne
-	    @JoinColumn(name = "estado_id") // Puedes ajustar el nombre de la columna según tu esquema de base de datos
-	   private Estado estado;
+	// @ManyToOne
+	//    @JoinColumn(name = "estado_id") // Puedes ajustar el nombre de la columna según tu esquema de base de datos
+	
 	@Transient
     private static EntityManagerFactory entityManagerFactory;
     @Transient
     private static EntityManager entityManager;
-	// Constructor por defecto (necesario para Hibernate)
+    private static Estado estado; // Instancia de Estado
     
     public Incidente() {
     }
-	
+	public static void setEstado(Estado estado) {
+        Incidente.estado = estado;
+	}
 	public Incidente(String id, String descripcion,Date fechaIncidente, Date tiempoResolucion, String consideraciones, Cliente cliente,
-			List<Tecnico> tecnico,Estado estado) {
+			List<Tecnico> tecnico) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -62,35 +64,28 @@ public class Incidente {
 		this.consideraciones = consideraciones;
 		this.cliente = cliente;
 		this.tecnico = tecnico;
-		this.estado = estado;
+		//this.estado = estado;
 	}
-	 public static void proceso() {
-	        entityManagerFactory = Persistence.createEntityManagerFactory("JPA_PU");
-	        entityManager = entityManagerFactory.createEntityManager();
+	public static void proceso() {
+	    // ... tu código existente
 
-	        try {
-	            entityManager.getTransaction().begin();
+	    try {
+	        entityManager.getTransaction().begin();
 
-	            // Obtener todos los incidentes de la base de datos
-	            List<Incidente> incidentes = entityManager.createQuery("SELECT i FROM Incidente i", Incidente.class)
-	                    .getResultList();
+	        // Obtener todos los incidentes de la base de datos
+	        List<Incidente> incidentes = entityManager.createQuery("SELECT i FROM Incidente i", Incidente.class)
+	                .getResultList();
 
-	            // Enviar cada incidente a la interfaz Estado
-	            for (Incidente incidente : incidentes) {
-	                Estado estado = incidente.getEstado(); // Asegúrate de tener el método getEstado() en tu clase Incidente
-	                estado.proceso(incidente);
-	            }
-
-	            entityManager.getTransaction().commit();
-	        } catch (Exception e) {
-	            if (entityManager.getTransaction().isActive()) {
-	                entityManager.getTransaction().rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	            entityManager.close();
-	            entityManagerFactory.close();
+	        // Enviar cada incidente a la interfaz Estado
+	        for (Incidente incidente : incidentes) {
+	            estado.proceso(incidente); // Llama al método proceso() de la instancia de Estado
 	        }
+
+	        entityManager.getTransaction().commit();
+
+	        // ... resto de tu código existente
+	    } catch (Exception e) {
+	        // ... manejo de excepciones
 	    }
-			
+	}		
 }
