@@ -12,7 +12,7 @@ public class Asignado implements IEstado {
 	public void Asignado(Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente ya se encuentra asignado.");
-		incidente.setEstadoInc(EstadoIncidente.ASIGNADO);
+		//incidente.setEstadoInc(EstadoIncidente.ASIGNADO);
 		//Enviar mensaje por mail al Tecnico.
 	}
 

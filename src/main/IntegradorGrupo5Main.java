@@ -2,12 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-<<<<<<< HEAD
 import main.Entidades.*;
-=======
-import main.Entidades.Incidente;
-
->>>>>>> c81b2b257660f3f5d2bc80998dc8ee8b53dad059
 
 public class IntegradorGrupo5Main {	
 	
@@ -125,10 +120,10 @@ public class IntegradorGrupo5Main {
 						
 						switch (opcionTecnico) {
 						case 1:
-							Tecnico.revisarIncidente();
+							//Tecnico.revisarIncidente();
 							break;
 						case 2:
-							Tecnico.resolverIncidente();
+							//Tecnico.resolverIncidente();
 							break;
 						case 3:
 							break;
@@ -139,7 +134,6 @@ public class IntegradorGrupo5Main {
 					break;
 				case 5: //SECTOR CLIENTE
 				case 6: //SECTOR INFORME
-					Incidente.proceso();
 				case 7: //SALIR DEL SISTEMA
 					System.out.println ("Muchas gracias por su visita");
 					teclado.close();

@@ -64,7 +64,7 @@ public class Tecnico extends Persona {
 	
 	static Scanner teclado = new Scanner (System.in);
 	
-	public static void revisarIncidente () {
+	/*public static void revisarIncidente () {
 		System.out.println("Por favor ingrese su numero de id:");
 		int id = teclado.nextInt();
 		
@@ -90,5 +90,5 @@ public class Tecnico extends Persona {
 		
 		EnCurso encurso = new EnCurso();
 		encurso.Resuelto(incidente);
-	}
+	}*/
 }
