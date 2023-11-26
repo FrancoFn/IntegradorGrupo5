@@ -10,14 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Persistence;
 import javax.persistence.Transient;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +31,8 @@ import main.TiempoResolucion;
 
 public class Incidente {
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	@Column
 	private String descripcion;
 	@Column
@@ -47,6 +47,8 @@ public class Incidente {
 	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "cliente_id") //Esto indica la columna en la tabla de Incidente que representa la relación
 	private Cliente cliente;
+	//@ManyToOne(fetch=FetchType.LAZY)
+	//@JoinColumn(name="tecnico_id")
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Tecnico> tecnico = new ArrayList<>();
 	@Column
@@ -63,10 +65,9 @@ public class Incidente {
     public Incidente() {
     }
 	
-		public Incidente(String id, String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
+		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
 			List<Tecnico> tecnico,EstadoIncidente estado, Especialidad categoria) {
 		super();
-		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;
 		this.tiempoResolucion = tiempoResolucion;

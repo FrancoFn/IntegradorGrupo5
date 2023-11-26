@@ -2,6 +2,9 @@ package main;
 
 import java.util.Scanner;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import main.Entidades.Incidente;
 
 public class Asignado implements IEstado {
@@ -12,7 +15,14 @@ public class Asignado implements IEstado {
 	public void Asignado(Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente ya se encuentra asignado.");
-		//incidente.setEstadoInc(EstadoIncidente.ASIGNADO);
+		incidente.setEstadoInc(EstadoIncidente.ASIGNADO);
+		
+		EntityManager em = ManagerPersistence.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(incidente);
+        tx.commit();
+		
 		//Enviar mensaje por mail al Tecnico.
 	}
 
@@ -23,6 +33,13 @@ public class Asignado implements IEstado {
 		String consideraciones = teclado.nextLine();
 		
 		incidente.setEstadoInc(EstadoIncidente.EN_CURSO);
+		incidente.setConsideraciones(consideraciones);
+		
+		EntityManager em = ManagerPersistence.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(incidente);
+        tx.commit();
 	}
 
 	@Override

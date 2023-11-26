@@ -83,13 +83,13 @@ public class MesaDeAyuda {
 		Incidente incidente = new Incidente();
 		incidente.creacionIncidente((Cliente)cliente.get(0), categoria, descripcion, tiempoResolucion, tecnico);
 		
-		//Asignado asignado = new Asignado();
-		//asignado.Asignado(incidente);
-		
 		EntityManager em = ManagerPersistence.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist(incidente);
         tx.commit();
+		
+		Asignado asignado = new Asignado();
+		asignado.Asignado(incidente);
 	}
 }

@@ -120,10 +120,10 @@ public class IntegradorGrupo5Main {
 						
 						switch (opcionTecnico) {
 						case 1:
-							//Tecnico.revisarIncidente();
+							Tecnico.revisarIncidente();
 							break;
 						case 2:
-							//Tecnico.resolverIncidente();
+							Tecnico.resolverIncidente();
 							break;
 						case 3:
 							break;
