@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
+import main.ServicioContratado;
 
 @Setter
 @Getter
@@ -17,7 +18,7 @@ import lombok.Setter;
 public class Cliente extends Persona {
 	
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany //(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Incidente> incidentes = new ArrayList<>();
     @Column(name = "cuit")
     private long cuit;

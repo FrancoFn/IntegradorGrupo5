@@ -1,6 +1,9 @@
-package main.Entidades;
+package main;
 import lombok.Getter;
 import lombok.Setter;
+import main.Entidades.Cliente;
+import main.Entidades.Tecnico;
+
 import java.util.ArrayList;
 import java.util.List;
 
