@@ -10,8 +10,11 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Query;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -74,9 +77,9 @@ public class Tecnico extends Persona {
 		q.setParameter("doc", estado);
 		q.setParameter("doc1", id);
 		List<Incidente> incidentes = q.getResultList();
-		
+				
 		int[] contador = {1};
-		if (incidentes != null) {
+		if (!incidentes.isEmpty()) {
 	        System.out.println ("Id - Descripcion - Categoria - Cliente");			
 			incidentes.stream().forEach(incidente -> 
 	        	System.out.println((contador[0]++)+" "+incidente.getDescripcion()+" "+incidente.getCategoria()+" "+incidente.getCliente().getNombre()));
@@ -94,6 +97,20 @@ public class Tecnico extends Persona {
 		
 		Asignado asignado = new Asignado();
 		asignado.EnCurso(incidente);
+		
+				
+		//Cambio la disponibilidad del Tecnico a FALSE
+		Query q2 = (Query) ManagerPersistence.getEntityManager().createQuery("SELECT t FROM Tecnico t WHERE t.id = :doc");
+		q2.setParameter("doc", id);
+		List<Tecnico> tecnico = q2.getResultList();
+		
+		((Tecnico)tecnico.get(0)).setDisponibilidad(false);
+		
+		EntityManager em = ManagerPersistence.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist((Tecnico)tecnico.get(0));
+        tx.commit();
 	}
 	
 	public static void resolverIncidente () {
@@ -108,7 +125,7 @@ public class Tecnico extends Persona {
 		List<Incidente> incidentes = q.getResultList();
 		
 		int[] contador = {1};
-		if (incidentes != null) {
+		if (!incidentes.isEmpty()) {
 	        System.out.println ("Id - Descripcion - Categoria - Cliente");			
 			incidentes.stream().forEach(incidente -> 
 	        	System.out.println((contador[0]++)+" "+incidente.getDescripcion()+" "+incidente.getCategoria()+" "+incidente.getCliente().getNombre()));
@@ -126,5 +143,18 @@ public class Tecnico extends Persona {
 		
 		EnCurso encurso = new EnCurso();
 		encurso.Resuelto(incidente);
+		
+		//Cambio la disponibilidad del Tecnico a TRUE
+		Query q2 = (Query) ManagerPersistence.getEntityManager().createQuery("SELECT t FROM Tecnico t WHERE t.id = :doc");
+		q2.setParameter("doc", id);
+		List<Tecnico> tecnico = q2.getResultList();
+				
+		((Tecnico)tecnico.get(0)).setDisponibilidad(true);
+		
+		EntityManager em = ManagerPersistence.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist((Tecnico)tecnico.get(0));
+        tx.commit();
 	}
 }
