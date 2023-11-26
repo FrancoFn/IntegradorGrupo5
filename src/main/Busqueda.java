@@ -1,20 +1,25 @@
-import main.Entidades.Incidente;
-import main.Entidades.Tecnico;
+package main;
+
+import main.Entidades.*;
 import main.Especialidad;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class Busquedas {
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
+
+public class Busqueda {
 	
 	//Quién fue el técnico con más incidentes resueltos en los últimos N días
-    public static Tecnico MasIncidentesResueltos(List<Tecnico> tecnicos, int ultimosDias) {
+    /*public static Tecnico masIncidentesResueltos(List<Tecnico> tecnicos, int ultimosDias) {
 
         Date fechaLimite = new Date();
         Date fechainicio = new Date() - ultimosDias;
@@ -38,7 +43,7 @@ public class Busquedas {
     
     
     //Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días
-    public static Tecnico obtenerIncidentesPorEspecialidad(List<Tecnico> tecnicos, Especialidad especialidad, int ultimosDias) {
+    public static Tecnico masIncidentesPorEspecialidad(List<Tecnico> tecnicos, Especialidad especialidad, int ultimosDias) {
         Date fechaLimite = new Date(); // Usa la fecha actual
 
         // Filtrar los incidentes de la especialidad específica
@@ -58,35 +63,37 @@ public class Busquedas {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
-    }
+    }*/
     
     
     //Quién fue el técnico que más rápido resolvió los incidentes
-    public static Tecnico obtenerTecnicoConMasIncidentesResueltos(List<Tecnico> tecnicos) {
-        Date fechaLimite = new Date();
-
-        Predicate<Incidente> filtroFecha = incidente ->
-                incidente.getTiempoResolucion() != null &&
-                        incidente.getTiempoResolucion().after(fechaLimite);
-        //Estado  == resuelto
-
-        List<Incidente> incidentesResueltos = tecnicos.stream()
-                .flatMap(tecnico -> tecnico.getIncidentes().stream())
-                .filter(filtroFecha)
-                .collect(Collectors.toList());
-
-
-        Optional<Tecnico> tecnicoConMasIncidentes = incidentesResueltos.stream()
-                .flatMap(incidente -> incidente.getTecnico().stream())
+    public static void obtenerTecnicoMasRapido () {
+    	
+    	EstadoIncidente estado = EstadoIncidente.RESUELTO;
+        Query q = (Query) ManagerPersistence.getEntityManager().createQuery("SELECT i FROM Incidente i WHERE i.estadoInc = :doc");
+        q.setParameter("doc", estado);
+        List<Incidente> incidentes = q.getResultList();
+        
+        // Calculo el tiempo promedio de resolucion
+        Map<Object, Double> tiempoPromedioPorTecnico = incidentes.stream()
                 .collect(Collectors.groupingBy(
-                        tecnico -> tecnico,
-                        Collectors.counting()
-                ))
-                .entrySet()
-                .stream()
-                .max(Comparator.comparing(Map.Entry::getValue))
-                .map(Map.Entry::getKey);
-
-        return tecnicoConMasIncidentes.orElse(null);
-    }
+                    incidente -> incidente.getTecnico(), 
+                    Collectors.averagingDouble(incidente -> incidente.getTiempoResolucionEnMinutos())
+                ));
+        
+        // Identifico al técnico con el tiempo promedio más rápido
+        Entry<Object, Double> tecnicoMasRapido = tiempoPromedioPorTecnico.entrySet().stream()
+                .min(Map.Entry.comparingByValue())
+                .orElse(null);
+        
+        if (tecnicoMasRapido != null) {
+            System.out.println("");
+        	System.out.println("El técnico que resuelve más rápido en promedio es: " + tecnicoMasRapido.toString() );
+            System.out.println("Tiempo promedio de resolución: " + tecnicoMasRapido.getValue() + " minutos");
+            System.out.println("");
+        } else {
+            System.out.println("No hay datos disponibles para determinar el técnico más rápido.");
+        }
+    }        
 }
+    	

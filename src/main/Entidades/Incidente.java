@@ -1,6 +1,7 @@
 package main.Entidades;
 
 import java.util.Date;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -88,7 +89,13 @@ public class Incidente {
 		this.fechaInicio = new Date();
 	}
 	
-	/*public static void proceso() {
+	public double getTiempoResolucionEnMinutos() {
+        double diffInMilliseconds = fechaFinalizacion.getTime() - fechaInicio.getTime();
+        return diffInMilliseconds / (60 * 1000);
+    }
+	
+	/*//Se utiliza para interfaz automatica
+	public static void proceso() {
         entityManagerFactory = Persistence.createEntityManagerFactory("JPA_PU");
         entityManager = entityManagerFactory.createEntityManager();
 

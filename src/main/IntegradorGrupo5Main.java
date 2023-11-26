@@ -134,6 +134,34 @@ public class IntegradorGrupo5Main {
 					break;
 				case 5: //SECTOR CLIENTE
 				case 6: //SECTOR INFORME
+					int opcionInforme = 0;
+					do
+					{
+						System.out.println ("Bienvenido al sector Informes. Que desea realizar:");
+						System.out.println ("1 - Tecnico con más incidentes en x tiempo.");
+						System.out.println ("2 - Tecnico con más incidentes en x tiempo por especialidad.");
+						System.out.println ("3 - Tecnico que más rápido reolvio los incidentes.");
+						System.out.println ("4 - Volver al menu principal");
+						
+						opcionInforme = teclado.nextInt();
+						
+						switch (opcionInforme) {
+						case 1:
+							//Busqueda.masIncidentesResueltos();
+							break;
+						case 2:
+							//Busqueda.masIncidentesPorEspecialidad();
+							break;
+						case 3:
+							Busqueda.obtenerTecnicoMasRapido();
+							break;
+						case 4:
+							break;
+						default:
+							System.out.println ("La opción ingresada no es valida por favor ingrese una opción valida.");
+						}
+					} while (opcionInforme != 4);
+					break;
 				case 7: //SALIR DEL SISTEMA
 					System.out.println ("Muchas gracias por su visita");
 					teclado.close();
