@@ -7,11 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import main.Entidades.Cliente;
-import main.Entidades.ServicioContratado;
 
 public class Comercial {
 	static Scanner teclado = new Scanner (System.in);	
 	
+	//Metodo para cargar de forma rapida Clientes en la base de datos 
 	public static void altaCliente () {
 		EntityManager em = ManagerPersistence.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -38,7 +38,9 @@ public class Comercial {
         em.persist(cliente5);
         em.persist(cliente6);
         tx.commit();
-    }/*
+    }
+	/*
+	// Método para dar de alta Clientes
 	public static void altaCliente () {
 		System.out.println ("Por favor ingrese la razón social del cliente:");
 		String nombre = teclado.nextLine();
@@ -84,6 +86,7 @@ public class Comercial {
 	} 
 	*/ 
 	
+	//Por defecto, falta modificar para que pida los datos.
 	public static void modificarCliente() {
 		System.out.println ("Por favor ingrese el Id del cliente a modificar:");
 		int id = teclado.nextInt();
@@ -102,6 +105,7 @@ public class Comercial {
         }
 	}
 	
+	
 	public static void bajaCliente() {
 		System.out.println ("Por favor ingrese el Id del cliente a dar de baja:");
 		int id = teclado.nextInt();
@@ -117,6 +121,5 @@ public class Comercial {
             Comercial.bajaCliente();
         }
 	}
-	
 	
 }

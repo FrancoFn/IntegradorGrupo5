@@ -2,6 +2,7 @@ package main.Entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -10,10 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.Query;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import main.Asignado;
+import main.Especialidad;
+import main.ManagerPersistence;
+import main.EnCurso;
+import main.Entidades.*;
 
 @Entity
 @Setter  
@@ -55,7 +62,33 @@ public class Tecnico extends Persona {
         System.out.println("Tecnico dado de baja: " + this.getNombre());
 	}
 	
-	public void revisarIncidente () {}
+	static Scanner teclado = new Scanner (System.in);
 	
-	public void resolverIncidente () {}
+	public static void revisarIncidente () {
+		System.out.println("Por favor ingrese su numero de id:");
+		int id = teclado.nextInt();
+		
+		try {
+			incidentes.stream().filter(incidente -> Tecnico.getId() == id && estadoInc.equal("ASIGNADO"))
+			.forEach(incidente -> System.out.println(incidente.getId()+" "+incidente.getDescripcion() 
+			+" "+incidente.getCategoria()+" "+incidente.getCliente()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
+		Asignado asignado = new Asignado();
+		asignado.EnCurso(incidente);
+	}
+	
+	public static void resolverIncidente () {
+		
+		int id = teclado.nextInt();			
+		
+		Incidente incidenteseleccionado = incidentes.stream().filter(incidente -> incidente.getId() == id).findFirst().orElse().filter(incidente -> incidente.getId(null));
+		
+		
+		EnCurso encurso = new EnCurso();
+		encurso.Resuelto(incidente);
+	}
 }

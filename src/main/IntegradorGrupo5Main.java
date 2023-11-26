@@ -2,6 +2,13 @@ package main;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
+import main.Entidades.*;
+=======
+import main.Entidades.Incidente;
+
+>>>>>>> c81b2b257660f3f5d2bc80998dc8ee8b53dad059
+
 public class IntegradorGrupo5Main {	
 	
 		public static void main(String[] args) {
@@ -89,29 +96,50 @@ public class IntegradorGrupo5Main {
 					do
 					{
 						System.out.println ("Bienvenido al sector de Mesa de Ayuda. Que desea realizar:");
-						System.out.println ("1 - Consultar Cliente");
-						System.out.println ("2 - Cargar Incidente");
-						System.out.println ("3 - Volver al menu principal");
+						System.out.println ("1 - Cargar Incidente");
+						System.out.println ("2 - Volver al menu principal");
 						
 						opcionMesaAyuda = teclado.nextInt();
 						
 						switch (opcionMesaAyuda) {
 						case 1:
-							MesaDeAyuda.mostrarServicioCliente();
+							MesaDeAyuda.cargarIncidente();
 							break;
 						case 2:
-							MesaDeAyuda.cargarIncidente();
+							break;
+						default:
+							System.out.println ("La opción ingresada no es valida por favor ingrese una opción valida.");
+						}
+					} while (opcionMesaAyuda != 2);
+					break;
+				case 4: //SECTOR TECNICO
+					int opcionTecnico = 0;
+					do
+					{
+						System.out.println ("Bienvenido al sector Tecnico. Que desea realizar:");
+						System.out.println ("1 - Revisar Incidentes");
+						System.out.println ("2 - Resolver Incidentes");
+						System.out.println ("3 - Volver al menu principal");
+						
+						opcionTecnico = teclado.nextInt();
+						
+						switch (opcionTecnico) {
+						case 1:
+							Tecnico.revisarIncidente();
+							break;
+						case 2:
+							Tecnico.resolverIncidente();
 							break;
 						case 3:
 							break;
 						default:
 							System.out.println ("La opción ingresada no es valida por favor ingrese una opción valida.");
 						}
-					} while (opcionMesaAyuda != 3);
+					} while (opcionTecnico != 3);
 					break;
-				case 4: //SECTOR TECNICO
 				case 5: //SECTOR CLIENTE
 				case 6: //SECTOR INFORME
+					Incidente.proceso();
 				case 7: //SALIR DEL SISTEMA
 					System.out.println ("Muchas gracias por su visita");
 					teclado.close();

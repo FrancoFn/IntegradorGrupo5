@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
+import main.ServicioContratado;
 
 @Setter
 @Getter
