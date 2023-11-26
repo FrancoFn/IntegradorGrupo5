@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Busquedas {
 
@@ -47,5 +50,33 @@ public class Busquedas {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
+    }
+
+    public static Tecnico obtenerTecnicoConMasIncidentesResueltos(List<Tecnico> tecnicos, int ultimosDias) {
+        Date fechaLimite = new Date();
+
+        Predicate<Incidente> filtroFecha = incidente ->
+                incidente.getTiempoResolucion() != null &&
+                        incidente.getTiempoResolucion().after(fechaLimite);
+
+
+        List<Incidente> incidentesResueltos = tecnicos.stream()
+                .flatMap(tecnico -> tecnico.getIncidentes().stream())
+                .filter(filtroFecha)
+                .collect(Collectors.toList());
+
+
+        Optional<Tecnico> tecnicoConMasIncidentes = incidentesResueltos.stream()
+                .flatMap(incidente -> incidente.getTecnico().stream())
+                .collect(Collectors.groupingBy(
+                        tecnico -> tecnico,
+                        Collectors.counting()
+                ))
+                .entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .map(Map.Entry::getKey);
+
+        return tecnicoConMasIncidentes.orElse(null);
     }
 }
