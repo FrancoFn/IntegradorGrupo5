@@ -2,6 +2,7 @@ package main.Entidades;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -92,5 +93,14 @@ public class Incidente {
 	            entityManagerFactory.close();
 	        }
 	    }
+
+	public Date calcularFechaLimite(int ultimosDias) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaIncidente); // Usa la fecha de inicio del incidente
+
+		calendar.add(Calendar.DAY_OF_YEAR, -ultimosDias); // Resta N días a la fecha de inicio del incidente
+
+		return new Date(calendar.getTimeInMillis()); // Devuelve la fecha calculada
+	}
 			
 }
