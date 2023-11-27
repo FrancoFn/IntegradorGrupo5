@@ -1,11 +1,10 @@
-package main.Entidades;
+package Interfazauto;
 
-import java.util.Date;
 
-public class EstadoResuelto implements Estado {
+/*public class EstadoResuelto implements IEstado {
     @Override
     public void proceso(Incidente incidente) {
-        Date fechaActual = new Date();
+        /*Date fechaActual = new Date();
 
         if (incidente.getTiempoResolucion().equals(fechaActual) || incidente.getTiempoResolucion().after(fechaActual)) {
             for (Tecnico tecnico : incidente.getTecnico()) {
@@ -14,4 +13,4 @@ public class EstadoResuelto implements Estado {
             System.out.println("Incidente resuelto para el incidente " + incidente.getId());
         }
     }
-}
+}*/

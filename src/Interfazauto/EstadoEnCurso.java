@@ -1,8 +1,6 @@
-package main.Entidades;
+package Interfazauto;
 
-import java.util.Date;
-
-public class EstadoEnCurso implements Estado {
+/*public class EstadoEnCurso implements IEstado {
     @Override
     public void proceso(Incidente incidente) {
         Date fechaActual = new Date();
@@ -11,4 +9,4 @@ public class EstadoEnCurso implements Estado {
             System.out.println("Nuestros técnicos están trabajando en el incidente " + incidente.getId());
         }
     }
-}
+}*/

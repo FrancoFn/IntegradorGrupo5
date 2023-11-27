@@ -29,7 +29,7 @@ public abstract class Persona {
     private String email;
 
     @Column(name = "estado")
-    private int estado;
+    private int estado; //0 dado de baja - 1 activo
 
     public Persona() {
     }

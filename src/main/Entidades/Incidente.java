@@ -1,24 +1,25 @@
 package main.Entidades;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Persistence;
 import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
+import main.Especialidad;
+import main.IEstado;
+import main.EstadoIncidente;
+import main.TiempoResolucion;
 
 @Setter
 @Getter
@@ -26,18 +27,23 @@ import lombok.Setter;
 
 public class Incidente {
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	@Column
 	private String descripcion;
 	@Column
-	private Date fechaIncidente;
+	private Date fechaInicio;
 	@Column
-	private Date tiempoResolucion;
+	private Date fechaFinalizacion;
+	@Column
+	private TiempoResolucion tiempoResolucion;
+	//private Date tiempoResolucion;
 	@Column
 	private String consideraciones;
 	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "cliente_id") //Esto indica la columna en la tabla de Incidente que representa la relación
 	private Cliente cliente;
+<<<<<<< HEAD
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Tecnico> tecnico = new ArrayList<>();
 	// @ManyToOne
@@ -56,16 +62,59 @@ public class Incidente {
 	}
 	public Incidente(String id, String descripcion,Date fechaIncidente, Date tiempoResolucion, String consideraciones, Cliente cliente,
 			List<Tecnico> tecnico) {
+=======
+	@ManyToOne(optional = false, fetch=FetchType.LAZY)
+	@JoinColumn(name = "tecnico_id") //Esto indica la columna en la tabla de Incidente que representa la relación
+	//@ManyToMany(cascade = CascadeType.ALL)
+	private Tecnico tecnico;
+	@Column
+	private Especialidad categoria;
+	@Column
+	private EstadoIncidente estadoInc;
+    @Transient
+    private static EntityManagerFactory entityManagerFactory;
+    @Transient
+    private static EntityManager entityManager;
+    private static IEstado estado; 
+
+    // Constructor por defecto (necesario para Hibernate)
+    public Incidente() {
+    }
+	
+		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
+			Tecnico tecnico,EstadoIncidente estado, Especialidad categoria) {
+>>>>>>> Pablo
 		super();
-		this.id = id;
 		this.descripcion = descripcion;
-		this.fechaIncidente=fechaIncidente;
+		this.fechaInicio = fechaInicio;
 		this.tiempoResolucion = tiempoResolucion;
 		this.consideraciones = consideraciones;
 		this.cliente = cliente;
 		this.tecnico = tecnico;
+<<<<<<< HEAD
 		//this.estado = estado;
 	}
+=======
+		this.estadoInc = estado;
+		this.categoria = categoria;
+	}
+	
+	public void creacionIncidente (Cliente cliente, Especialidad categoria, String descripcion, TiempoResolucion tiempo, Tecnico tecnico) {
+		this.cliente = cliente;
+		this.categoria = categoria;
+		this.descripcion = descripcion;
+		this.tiempoResolucion = tiempo;
+		this.tecnico = tecnico;
+		this.fechaInicio = new Date();
+	}
+	
+	public double getTiempoResolucionEnMinutos() {
+        double diffInMilliseconds = fechaFinalizacion.getTime() - fechaInicio.getTime();
+        return diffInMilliseconds / (60 * 1000);
+    }
+	
+	/*//Se utiliza para interfaz automatica
+>>>>>>> Pablo
 	public static void proceso() {
         entityManagerFactory = Persistence.createEntityManagerFactory("JPA_PU");
         entityManager = entityManagerFactory.createEntityManager();
@@ -83,7 +132,11 @@ public class Incidente {
             } else {
                 // Enviar cada incidente a la interfaz Estado
                 for (Incidente incidente : incidentes) {
+<<<<<<< HEAD
                     Estado.estado.proceso(incidente);
+=======
+                    estado.proceso(incidente);
+>>>>>>> Pablo
                 }
             }
 
@@ -97,5 +150,10 @@ public class Incidente {
             entityManager.close();
             entityManagerFactory.close();
         }
+<<<<<<< HEAD
     }		
 }
+=======
+    }*/
+}				
+>>>>>>> Pablo
