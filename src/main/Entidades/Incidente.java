@@ -43,27 +43,6 @@ public class Incidente {
 	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "cliente_id") //Esto indica la columna en la tabla de Incidente que representa la relación
 	private Cliente cliente;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Tecnico> tecnico = new ArrayList<>();
-	// @ManyToOne
-	//    @JoinColumn(name = "estado_id") // Puedes ajustar el nombre de la columna según tu esquema de base de datos
-	
-	@Transient
-    private static EntityManagerFactory entityManagerFactory;
-    @Transient
-    private static EntityManager entityManager;
-    private static Estado estado; // Instancia de Estado
-    
-    public Incidente() {
-    }
-	public static void setEstado(Estado estado) {
-        Incidente.estado = estado;
-	}
-	public Incidente(String id, String descripcion,Date fechaIncidente, Date tiempoResolucion, String consideraciones, Cliente cliente,
-			List<Tecnico> tecnico) {
-=======
 	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "tecnico_id") //Esto indica la columna en la tabla de Incidente que representa la relación
 	//@ManyToMany(cascade = CascadeType.ALL)
@@ -84,29 +63,6 @@ public class Incidente {
 	
 		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
 			Tecnico tecnico,EstadoIncidente estado, Especialidad categoria) {
->>>>>>> Pablo
-=======
-	@ManyToOne(optional = false, fetch=FetchType.LAZY)
-	@JoinColumn(name = "tecnico_id") //Esto indica la columna en la tabla de Incidente que representa la relación
-	//@ManyToMany(cascade = CascadeType.ALL)
-	private Tecnico tecnico;
-	@Column
-	private Especialidad categoria;
-	@Column
-	private EstadoIncidente estadoInc;
-    @Transient
-    private static EntityManagerFactory entityManagerFactory;
-    @Transient
-    private static EntityManager entityManager;
-    private static IEstado estado; 
-
-    // Constructor por defecto (necesario para Hibernate)
-    public Incidente() {
-    }
-	
-		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
-			Tecnico tecnico,EstadoIncidente estado, Especialidad categoria) {
->>>>>>> Pablo
 		super();
 		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;
@@ -114,13 +70,6 @@ public class Incidente {
 		this.consideraciones = consideraciones;
 		this.cliente = cliente;
 		this.tecnico = tecnico;
-<<<<<<< HEAD
-<<<<<<< HEAD
-		//this.estado = estado;
-	}
-=======
-=======
->>>>>>> Pablo
 		this.estadoInc = estado;
 		this.categoria = categoria;
 	}
@@ -140,10 +89,6 @@ public class Incidente {
     }
 	
 	/*//Se utiliza para interfaz automatica
-<<<<<<< HEAD
->>>>>>> Pablo
-=======
->>>>>>> Pablo
 	public static void proceso() {
         entityManagerFactory = Persistence.createEntityManagerFactory("JPA_PU");
         entityManager = entityManagerFactory.createEntityManager();
@@ -161,15 +106,7 @@ public class Incidente {
             } else {
                 // Enviar cada incidente a la interfaz Estado
                 for (Incidente incidente : incidentes) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    Estado.estado.proceso(incidente);
-=======
                     estado.proceso(incidente);
->>>>>>> Pablo
-=======
-                    estado.proceso(incidente);
->>>>>>> Pablo
                 }
             }
 
@@ -183,15 +120,5 @@ public class Incidente {
             entityManager.close();
             entityManagerFactory.close();
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    }		
-}
-=======
     }*/
 }				
->>>>>>> Pablo
-=======
-    }*/
-}				
->>>>>>> Pablo
