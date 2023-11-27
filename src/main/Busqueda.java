@@ -18,8 +18,6 @@ import java.text.DecimalFormatSymbols;
 
 import javax.persistence.Query;
 
-
-
 public class Busqueda {
 	
 	//Quién fue el técnico con más incidentes resueltos en los últimos N días
@@ -90,9 +88,7 @@ public class Busqueda {
 	    	    incidente -> Arrays.asList(incidente.getTecnico().getNombre(), incidente.getCategoria()),
 	    	    Collectors.counting()
 	    	    ));
-
-	    
-	  
+ 
 	    // Encontrar al técnico con más incidentes resueltos
 	    Entry<Object,Long> tecnicoMasIncidentesporCategoria = incidentesResueltosPorTecnico.entrySet().stream()
 	    		.max(Map.Entry.comparingByValue())
