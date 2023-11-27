@@ -140,17 +140,17 @@ public class IntegradorGrupo5Main {
 						System.out.println ("Bienvenido al sector Informes. Que desea realizar:");
 						System.out.println ("1 - Tecnico con más incidentes en x tiempo.");
 						System.out.println ("2 - Tecnico con más incidentes en x tiempo por especialidad.");
-						System.out.println ("3 - Tecnico que más rápido reolvio los incidentes.");
+						System.out.println ("3 - Tecnico que más rápido resolvio los incidentes.");
 						System.out.println ("4 - Volver al menu principal");
 						
 						opcionInforme = teclado.nextInt();
 						
 						switch (opcionInforme) {
 						case 1:
-							//Busqueda.masIncidentesResueltos();
+							Busqueda.masIncidentesResueltos();
 							break;
 						case 2:
-							//Busqueda.masIncidentesPorEspecialidad();
+							Busqueda.masIncidentesResueltosPorEspecialidad();
 							break;
 						case 3:
 							Busqueda.obtenerTecnicoMasRapido();
