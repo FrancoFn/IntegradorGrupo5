@@ -17,19 +17,46 @@ import javax.persistence.Query;
 public class Busqueda {
 	
 	//Quién fue el técnico con más incidentes resueltos en los últimos N días
-    /*public static Tecnico masIncidentesResueltos(List<Tecnico> tecnicos, int ultimosDias) {
+    public static Tecnico MasIncidentesResueltos(List<Tecnico> tecnicos) {
+    // Obtener la fecha límite
+    Date fechaLimite = new Date();
 
+    // Leer el número de días desde la consola
+    int ultimosDias = obtenerUltimosDias();
+
+    // Restar N días a la fecha actual
+    fechaLimite = new Date(fechaLimite.getTime() - ultimosDias * 24 * 3600 * 1000);
+
+    // Filtrar y contar los incidentes resueltos por cada técnico
+    Map<Tecnico, Long> incidentesResueltosPorTecnico = tecnicos.stream()
+            .flatMap(tecnico -> tecnico.getIncidentes().stream())
+            .filter(incidente -> EstadoIncidente.RESUELTO.equals(incidente.getEstadoInc()))
+            .filter(incidente -> incidente.getFechaFinalizacion() != null && incidente.getFechaFinalizacion())
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+    // Encontrar al técnico con más incidentes resueltos
+        return incidentesResueltosPorTecnico.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+                .orElse(null);
+}
+
+    public static Tecnico MasIncidentesResueltosPorEspecialidad(List<Tecnico> tecnicos, Especialidad especialidad) {
+        // Obtener la fecha límite
         Date fechaLimite = new Date();
-        Date fechainicio = new Date() - ultimosDias;
-        
-        //condiciones
-        incidente get.EstadoIncidente = Resuelto 
-        fechaFinalizacion >= fechainicio y <=fechalimite
-        
-        // Contar los incidentes resueltos por cada técnico
+
+        // Leer el número de días desde la consola
+        int ultimosDias = obtenerUltimosDias();
+
+        // Restar N días a la fecha actual
+        fechaLimite = new Date(fechaLimite.getTime() - ultimosDias * 24 * 3600 * 1000);
+
+        // Filtrar y contar los incidentes resueltos por cada técnico
         Map<Tecnico, Long> incidentesResueltosPorTecnico = tecnicos.stream()
                 .flatMap(tecnico -> tecnico.getIncidentes().stream())
-                .filter(incidente -> incidente.getTiempoResolucion() != null && incidente.getTiempoResolucion().after(fechaLimite))
+                .filter(incidente -> EstadoIncidente.RESUELTO.equals(incidente.getEstadoInc()))
+                .filter(incidente -> incidente.getFechaFinalizacion() != null && incidente.getFechaFinalizacion())
+                .filter(incidente -> incidente.getTecnico().stream().anyMatch(tecnico -> tecnico.getEspecialidades().contains(especialidad)))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         // Encontrar al técnico con más incidentes resueltos
@@ -38,10 +65,16 @@ public class Busqueda {
                 .map(Map.Entry::getKey)
                 .orElse(null);
     }
-    
+
+    private static int obtenerUltimosDias() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cantidad de días para buscar incidentes resueltos: ");
+        return scanner.nextInt();
+    }
+
     
     //Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días
-    public static Tecnico masIncidentesPorEspecialidad(List<Tecnico> tecnicos, Especialidad especialidad, int ultimosDias) {
+    /*public static Tecnico masIncidentesPorEspecialidad(List<Tecnico> tecnicos, Especialidad especialidad, int ultimosDias) {
         Date fechaLimite = new Date(); // Usa la fecha actual
 
         // Filtrar los incidentes de la especialidad específica
