@@ -49,10 +49,10 @@ public class Incidente {
 	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "cliente_id") //Esto indica la columna en la tabla de Incidente que representa la relación
 	private Cliente cliente;
-	//@ManyToOne(fetch=FetchType.LAZY)
-	//@JoinColumn(name="tecnico_id")
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Tecnico> tecnico = new ArrayList<>();
+	@ManyToOne(optional = false, fetch=FetchType.LAZY)
+	@JoinColumn(name = "tecnico_id") //Esto indica la columna en la tabla de Incidente que representa la relación
+	//@ManyToMany(cascade = CascadeType.ALL)
+	private Tecnico tecnico;
 	@Column
 	private Especialidad categoria;
 	@Column
@@ -68,7 +68,7 @@ public class Incidente {
     }
 	
 		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
-			List<Tecnico> tecnico,EstadoIncidente estado, Especialidad categoria) {
+			Tecnico tecnico,EstadoIncidente estado, Especialidad categoria) {
 		super();
 		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;
@@ -80,7 +80,7 @@ public class Incidente {
 		this.categoria = categoria;
 	}
 	
-	public void creacionIncidente (Cliente cliente, Especialidad categoria, String descripcion, TiempoResolucion tiempo, List<Tecnico> tecnico) {
+	public void creacionIncidente (Cliente cliente, Especialidad categoria, String descripcion, TiempoResolucion tiempo, Tecnico tecnico) {
 		this.cliente = cliente;
 		this.categoria = categoria;
 		this.descripcion = descripcion;

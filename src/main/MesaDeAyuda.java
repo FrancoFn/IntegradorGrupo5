@@ -81,7 +81,7 @@ public class MesaDeAyuda {
 		
 		//Creacion del incidente y persintecia en base de datos
 		Incidente incidente = new Incidente();
-		incidente.creacionIncidente((Cliente)cliente.get(0), categoria, descripcion, tiempoResolucion, tecnico);
+		incidente.creacionIncidente((Cliente)cliente.get(0), categoria, descripcion, tiempoResolucion, (Tecnico)tecnico.get(0));
 		
 		EntityManager em = ManagerPersistence.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -90,6 +90,6 @@ public class MesaDeAyuda {
         tx.commit();
 		
 		Asignado asignado = new Asignado();
-		asignado.Asignado(incidente);
+		asignado.Asignar(incidente);
 	}
 }

@@ -35,8 +35,7 @@ public class Tecnico extends Persona {
     @CollectionTable(name = "tecnico_especialidades", joinColumns = @JoinColumn(name = "tecnico_id"))
     @Column
 	private List<Especialidad> especialidades = new ArrayList<>();
-	@ManyToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
-	private List<Incidente> incidentes = new ArrayList<>();
+	//private List<Incidente> incidentes = new ArrayList<>();
 	@Column
 	private boolean disponibilidad; 
 	

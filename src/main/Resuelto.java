@@ -5,7 +5,7 @@ import main.Entidades.Incidente;
 public class Resuelto implements IEstado {
 
 	@Override
-	public void Asignado(Incidente incidente) {
+	public void Asignar (Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente ya se encuentra resulto.");
 	}

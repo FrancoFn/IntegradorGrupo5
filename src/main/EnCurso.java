@@ -10,7 +10,7 @@ import main.Entidades.Incidente;
 public class EnCurso implements IEstado {
 
 	@Override
-	public void Asignado(Incidente incidente) {
+	public void Asignar(Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente se encuentra en curso no puede volver a asignarse.");
 	}

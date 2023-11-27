@@ -12,7 +12,7 @@ public class Asignado implements IEstado {
 	Scanner teclado = new Scanner (System.in);
 	
 	@Override
-	public void Asignado(Incidente incidente) {
+	public void Asignar(Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente ya se encuentra asignado.");
 		incidente.setEstadoInc(EstadoIncidente.ASIGNADO);

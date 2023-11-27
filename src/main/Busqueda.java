@@ -13,6 +13,9 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
@@ -77,7 +80,7 @@ public class Busqueda {
         // Calculo el tiempo promedio de resolucion
         Map<Object, Double> tiempoPromedioPorTecnico = incidentes.stream()
                 .collect(Collectors.groupingBy(
-                    incidente -> incidente.getTecnico(), 
+                    incidente -> incidente.getTecnico().getNombre(), 
                     Collectors.averagingDouble(incidente -> incidente.getTiempoResolucionEnMinutos())
                 ));
         
@@ -88,12 +91,20 @@ public class Busqueda {
         
         if (tecnicoMasRapido != null) {
             System.out.println("");
-        	System.out.println("El técnico que resuelve más rápido en promedio es: " + tecnicoMasRapido.toString() );
-            System.out.println("Tiempo promedio de resolución: " + tecnicoMasRapido.getValue() + " minutos");
+        	System.out.println("El técnico que resuelve más rápido en promedio es: " + tecnicoMasRapido.getKey());
+            System.out.println("Tiempo promedio de resolución: " + Busqueda.convertirString(tecnicoMasRapido.getValue()) + " minutos");
             System.out.println("");
         } else {
             System.out.println("No hay datos disponibles para determinar el técnico más rápido.");
         }
-    }        
+    }
+    
+    public static String convertirString(double decimal){
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setDecimalSeparator(',');
+		symbols.setGroupingSeparator('.');
+		DecimalFormat decimalFormat = new DecimalFormat("#,###.##", symbols);
+		return decimalFormat.format(decimal);
+	}
 }
     	
