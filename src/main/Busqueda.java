@@ -1,23 +1,18 @@
 package main;
 
 import main.Entidades.*;
-import main.Especialidad;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Function;
+
 import java.util.stream.Collectors;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import javax.persistence.Query;
-import javax.persistence.EntityManager;
+
 
 public class Busqueda {
 	

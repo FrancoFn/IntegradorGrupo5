@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.Query;
 
 import javax.persistence.ElementCollection;
@@ -95,7 +93,7 @@ public class Tecnico extends Persona {
 		incidente = (Incidente)incidentes.get(idResolver-1);
 		
 		Asignado asignado = new Asignado();
-		asignado.EnCurso(incidente);
+		asignado.enDesarrollo(incidente);
 		
 				
 		//Cambio la disponibilidad del Tecnico a FALSE
@@ -141,7 +139,7 @@ public class Tecnico extends Persona {
 		incidente = (Incidente)incidentes.get(idResolver-1);
 		
 		EnCurso encurso = new EnCurso();
-		encurso.Resuelto(incidente);
+		encurso.finalizado(incidente);
 		
 		//Cambio la disponibilidad del Tecnico a TRUE
 		Query q2 = (Query) ManagerPersistence.getEntityManager().createQuery("SELECT t FROM Tecnico t WHERE t.id = :doc");

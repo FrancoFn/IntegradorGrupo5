@@ -1,12 +1,7 @@
 package main.Entidades;
 
 import java.util.Date;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -16,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -61,7 +55,7 @@ public class Incidente {
     private static EntityManagerFactory entityManagerFactory;
     @Transient
     private static EntityManager entityManager;
-    private static IEstado estado; // Instancia de Estado
+    private static IEstado estado; 
 
     // Constructor por defecto (necesario para Hibernate)
     public Incidente() {

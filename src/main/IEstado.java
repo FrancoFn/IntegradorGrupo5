@@ -3,11 +3,11 @@ package main;
 import main.Entidades.Incidente;
 
 public interface IEstado {
-	public void Asignar(Incidente incidente);
+	public void asignar(Incidente incidente);
 	
-	public void EnCurso(Incidente incidente);
+	public void enDesarrollo(Incidente incidente);
 	
-	public void Resuelto(Incidente incidente);
+	public void finalizado(Incidente incidente);
 	
 	//void proceso(Incidente incidente);
 }

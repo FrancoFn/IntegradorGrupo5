@@ -1,9 +1,5 @@
 package Interfazauto;
 
-import java.util.Date;
-
-import main.Entidades.Incidente;
-
 /*public class EstadoAsignado implements IEstado {
     @Override
     public void proceso(Incidente incidente) {

@@ -1,9 +1,5 @@
 package Interfazauto;
 
-import java.util.Date;
-
-import main.Entidades.Incidente;
-import main.Entidades.Tecnico;
 
 /*public class EstadoResuelto implements IEstado {
     @Override

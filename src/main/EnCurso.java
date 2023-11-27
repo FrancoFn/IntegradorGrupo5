@@ -10,19 +10,19 @@ import main.Entidades.Incidente;
 public class EnCurso implements IEstado {
 
 	@Override
-	public void Asignar(Incidente incidente) {
+	public void asignar(Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente se encuentra en curso no puede volver a asignarse.");
 	}
 
 	@Override
-	public void EnCurso(Incidente incidente) {
+	public void enDesarrollo(Incidente incidente) {
 		// TODO Auto-generated method stub
 		System.out.println ("El incidente ya se encuentra en curso.");
 	}
 
 	@Override
-	public void Resuelto(Incidente incidente) {
+	public void finalizado(Incidente incidente) {
 		// TODO Auto-generated method stub
 		incidente.setEstadoInc(EstadoIncidente.RESUELTO);
 		incidente.setFechaFinalizacion(new Date());

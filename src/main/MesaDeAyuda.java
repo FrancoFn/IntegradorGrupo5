@@ -7,12 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import org.hibernate.type.BooleanType;
 
 import main.Entidades.Cliente;
 import main.Entidades.Incidente;
 import main.Entidades.Tecnico;
-import main.Asignado;
 
 public class MesaDeAyuda {
 	static Scanner teclado = new Scanner (System.in);	
@@ -90,6 +88,6 @@ public class MesaDeAyuda {
         tx.commit();
 		
 		Asignado asignado = new Asignado();
-		asignado.Asignar(incidente);
+		asignado.asignar(incidente);
 	}
 }
