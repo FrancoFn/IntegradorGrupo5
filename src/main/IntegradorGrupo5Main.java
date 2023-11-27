@@ -135,25 +135,39 @@ public class IntegradorGrupo5Main {
 				case 5: //SECTOR CLIENTE
 				case 6: //SECTOR INFORME
 <<<<<<< HEAD
+<<<<<<< HEAD
 					Incidente.proceso();
 =======
+=======
+>>>>>>> Pablo
 					int opcionInforme = 0;
 					do
 					{
 						System.out.println ("Bienvenido al sector Informes. Que desea realizar:");
 						System.out.println ("1 - Tecnico con más incidentes en x tiempo.");
 						System.out.println ("2 - Tecnico con más incidentes en x tiempo por especialidad.");
+<<<<<<< HEAD
 						System.out.println ("3 - Tecnico que más rápido reolvio los incidentes.");
+=======
+						System.out.println ("3 - Tecnico que más rápido resolvio los incidentes.");
+>>>>>>> Pablo
 						System.out.println ("4 - Volver al menu principal");
 						
 						opcionInforme = teclado.nextInt();
 						
 						switch (opcionInforme) {
 						case 1:
+<<<<<<< HEAD
 							//Busqueda.masIncidentesResueltos();
 							break;
 						case 2:
 							//Busqueda.masIncidentesPorEspecialidad();
+=======
+							Busqueda.masIncidentesResueltos();
+							break;
+						case 2:
+							Busqueda.masIncidentesResueltosPorEspecialidad();
+>>>>>>> Pablo
 							break;
 						case 3:
 							Busqueda.obtenerTecnicoMasRapido();
@@ -164,6 +178,9 @@ public class IntegradorGrupo5Main {
 							System.out.println ("La opción ingresada no es valida por favor ingrese una opción valida.");
 						}
 					} while (opcionInforme != 4);
+<<<<<<< HEAD
+>>>>>>> Pablo
+=======
 >>>>>>> Pablo
 					break;
 				case 7: //SALIR DEL SISTEMA

@@ -44,6 +44,7 @@ public class Incidente {
 	@JoinColumn(name = "cliente_id") //Esto indica la columna en la tabla de Incidente que representa la relación
 	private Cliente cliente;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Tecnico> tecnico = new ArrayList<>();
 	// @ManyToOne
@@ -84,6 +85,28 @@ public class Incidente {
 		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
 			Tecnico tecnico,EstadoIncidente estado, Especialidad categoria) {
 >>>>>>> Pablo
+=======
+	@ManyToOne(optional = false, fetch=FetchType.LAZY)
+	@JoinColumn(name = "tecnico_id") //Esto indica la columna en la tabla de Incidente que representa la relación
+	//@ManyToMany(cascade = CascadeType.ALL)
+	private Tecnico tecnico;
+	@Column
+	private Especialidad categoria;
+	@Column
+	private EstadoIncidente estadoInc;
+    @Transient
+    private static EntityManagerFactory entityManagerFactory;
+    @Transient
+    private static EntityManager entityManager;
+    private static IEstado estado; 
+
+    // Constructor por defecto (necesario para Hibernate)
+    public Incidente() {
+    }
+	
+		public Incidente(String descripcion,Date fechaInicio, TiempoResolucion tiempoResolucion, String consideraciones, Cliente cliente,
+			Tecnico tecnico,EstadoIncidente estado, Especialidad categoria) {
+>>>>>>> Pablo
 		super();
 		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;
@@ -92,9 +115,12 @@ public class Incidente {
 		this.cliente = cliente;
 		this.tecnico = tecnico;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//this.estado = estado;
 	}
 =======
+=======
+>>>>>>> Pablo
 		this.estadoInc = estado;
 		this.categoria = categoria;
 	}
@@ -114,6 +140,9 @@ public class Incidente {
     }
 	
 	/*//Se utiliza para interfaz automatica
+<<<<<<< HEAD
+>>>>>>> Pablo
+=======
 >>>>>>> Pablo
 	public static void proceso() {
         entityManagerFactory = Persistence.createEntityManagerFactory("JPA_PU");
@@ -133,7 +162,11 @@ public class Incidente {
                 // Enviar cada incidente a la interfaz Estado
                 for (Incidente incidente : incidentes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     Estado.estado.proceso(incidente);
+=======
+                    estado.proceso(incidente);
+>>>>>>> Pablo
 =======
                     estado.proceso(incidente);
 >>>>>>> Pablo
@@ -151,8 +184,13 @@ public class Incidente {
             entityManagerFactory.close();
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
     }		
 }
+=======
+    }*/
+}				
+>>>>>>> Pablo
 =======
     }*/
 }				

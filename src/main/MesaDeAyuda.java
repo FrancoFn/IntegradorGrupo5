@@ -28,6 +28,7 @@ public class MesaDeAyuda {
 		List<?> cliente = q.getResultList();
 		if (!cliente.isEmpty()){
 <<<<<<< HEAD
+<<<<<<< HEAD
 			System.out.println ("El sercicio contratado por el cliente es: "+ ((Cliente)cliente.get(0)).getContratacion());			
 		} else {
 			System.out.println ("El cliente no existe comuniquese con el sector comercial para su ingreso.");
@@ -37,6 +38,8 @@ public class MesaDeAyuda {
 	public static void cargarIncidente() {
 		
 =======
+=======
+>>>>>>> Pablo
 			if ((((Cliente)cliente.get(0)).getEstado() == 0)){
 				System.out.println("El cliente ha sido dado de baja. Comuniquese con el sector comercial.");
 				return;
@@ -99,6 +102,9 @@ public class MesaDeAyuda {
 		
 		Asignado asignado = new Asignado();
 		asignado.asignar(incidente);
+<<<<<<< HEAD
+>>>>>>> Pablo
+=======
 >>>>>>> Pablo
 	}
 }
